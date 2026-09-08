@@ -1,0 +1,11 @@
+### W4D2: Predict Questions:
+
+- You delete one of the two pods while a client inside the cluster hits the Service every 100 ms. How many requests fail: zero, a handful, or half of them until the pod returns?
+  > a handful or requests will fail, 
+- A rolling update replaces both pods with readiness probes gating traffic. Same client. How many failures this time? Commit to a number. 
+  > 0 failures.
+- The app answers 503 on /health until its backend loads. Which probe is that for, readiness or liveness, and what would go wrong if you used it for the other one? 
+  > Readiness probe. If used as liveness, Kubernetes could repeatedly restart the pod while the backend is still loading.
+- A roll under your constraint card's settings (Step 6): how many failures, and does your card accept them?
+  > 0 failures; Card A accepts them
+
