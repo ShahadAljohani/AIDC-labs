@@ -1,0 +1,10 @@
+## Predict Questions:
+
+
+helm install team ./serving-chart then helm install shadow ./serving-chart: what exists in the cluster that could not exist with plain kubectl apply of the same YAML twice? 
+  > twice 
+The HPA targets 50% of a 250m CPU request. Your load pushes each pod to ~300m. How many replicas does the controller want? (The formula is in the deck; do the arithmetic.)
+  > Target = 50% of 250m = 125m. Usage = 300m. Ratio = 300/125 = 2.4 → ceil = 3 replicas
+When the load stops, do replicas drop immediately? What is the risk if they did?
+  > No, replicas don't drop immediately. scaleDownStabilizationSeconds first. Risk if it did drop instantly: flapping a brief dip in load kills a pod, then load ticks back up and it has to spin up again, 
+    causing thrashing and repeated cold-starts instead of stable capacity.
